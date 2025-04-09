@@ -155,8 +155,25 @@ public class listagemVIEW extends javax.swing.JFrame {
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        //vendasVIEW vendas = new vendasVIEW(); 
-        //vendas.setVisible(true);
+        try {
+        ProdutosDAO dao = new ProdutosDAO();
+        ArrayList<ProdutosDTO> lista = dao.listarProdutosVendidos(); // apenas vendidos
+
+        DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel(); // tabela correta
+        model.setRowCount(0); // limpa a tabela antes
+
+        for (ProdutosDTO produto : lista) {
+            model.addRow(new Object[]{
+                produto.getId(),
+                produto.getNome(),
+                produto.getValor(),
+                produto.getStatus()
+            });
+        }
+
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "  Erro ao listar produtos vendidos: " + e.getMessage());
+    }
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
