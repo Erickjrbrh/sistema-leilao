@@ -1,6 +1,5 @@
 
 import java.util.ArrayList;
-import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /*
@@ -137,43 +136,17 @@ public class listagemVIEW extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnVenderActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVenderActionPerformed
-        try {
-        int id = Integer.parseInt(id_produto_venda.getText());
+        String id = id_produto_venda.getText();
         
         ProdutosDAO produtosdao = new ProdutosDAO();
-        produtosdao.venderProduto(id);
         
-        JOptionPane.showMessageDialog(null, "Produto vendido com sucesso!");
-        listarProdutos(); // Atualiza a tabela
-        id_produto_venda.setText(""); // Limpa o campo de ID
-
-    } catch (NumberFormatException e) {
-        JOptionPane.showMessageDialog(null, "Digite um ID válido.");
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Erro ao vender produto: " + e.getMessage());
-    }
+        //produtosdao.venderProduto(Integer.parseInt(id));
+        listarProdutos();
     }//GEN-LAST:event_btnVenderActionPerformed
 
     private void btnVendasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVendasActionPerformed
-        try {
-        ProdutosDAO dao = new ProdutosDAO();
-        ArrayList<ProdutosDTO> lista = dao.listarProdutosVendidos(); // apenas vendidos
-
-        DefaultTableModel model = (DefaultTableModel) listaProdutos.getModel(); // tabela correta
-        model.setRowCount(0); // limpa a tabela antes
-
-        for (ProdutosDTO produto : lista) {
-            model.addRow(new Object[]{
-                produto.getId(),
-                produto.getNome(),
-                produto.getValor(),
-                produto.getStatus()
-            });
-        }
-
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "  Erro ao listar produtos vendidos: " + e.getMessage());
-    }
+        //vendasVIEW vendas = new vendasVIEW(); 
+        //vendas.setVisible(true);
     }//GEN-LAST:event_btnVendasActionPerformed
 
     private void btnVoltarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVoltarActionPerformed
